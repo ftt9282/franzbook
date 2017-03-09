@@ -1,8 +1,8 @@
 class CreateFriendships < ActiveRecord::Migration[5.0]
   def change
     create_table :friendships do |t|
-      t.integer :user_id
-      t.integer :friend_id
+      t.integer :active_user_id
+      t.integer :passive_user_id
 
       t.timestamps
     end
