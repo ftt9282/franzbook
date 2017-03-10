@@ -16,6 +16,7 @@
 .navbar {
   font-family: verdana;
   width: 100%;
+  border-bottom: solid black 2px;
 }
 
 .navbar ul {
