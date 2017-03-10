@@ -1,0 +1,8 @@
+<h1>You have pending friend requests from...</h1>
+
+<% @pending_friendships.each do |friend| %>
+  <div>
+    <span><%= friend.email %></span>
+    <span>| Accept?</span>
+  </div>
+<% end %>
