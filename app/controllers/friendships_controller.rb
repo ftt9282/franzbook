@@ -10,4 +10,10 @@ class FriendshipsController < ApplicationController
   	current_user.send_friend_request(@user)
   	redirect_to current_user
   end
+
+  def update
+  	@friendship = Friendship.find(params[:friendship_id])
+  	@friendship.accept_friend_request
+  	redirect_to current_user
+  end
 end

@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
   # Returns an array of users who offered the current user a friend request
   def pending_friends
-  	friendship_requests = self.passive_relationships.where(status_flag: 0)
-    friendship_requests.map { |request| request.active_user }
+  	self.passive_relationships.where(status_flag: 0)
+    #friendship_requests.map { |request| request.active_user }
   end
 end

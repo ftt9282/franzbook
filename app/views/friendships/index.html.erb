@@ -1,8 +1,13 @@
 <h1>You have pending friend requests from...</h1>
 
-<% @pending_friendships.each do |friend| %>
+<% @pending_friendships.each do |friendship| %>
   <div>
-    <span><%= friend.email %></span>
-    <span>| Accept?</span>
+    <span><%= friendship.active_user.email %> |</span>
+    <span>
+      <%= form_for [@user, friendship] do |f| %>
+        <%= hidden_field_tag :friendship_id, friendship.id %>
+        <%= f.submit "Accept?" %>
+      <% end %>
+    </span>
   </div>
 <% end %>
