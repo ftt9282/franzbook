@@ -4,10 +4,19 @@
   <div>
     <span><%= friendship.active_user.email %> |</span>
     <span>
-      <%= form_for [@user, friendship] do |f| %>
+      <%= form_for friendship do |f| %>
         <%= hidden_field_tag :friendship_id, friendship.id %>
         <%= f.submit "Accept?" %>
       <% end %>
     </span>
   </div>
+<% end %>
+
+<h1>Current friends!</h1>
+<% if @all_friends %>
+  <% @all_friends.each do |friendship| %>
+    <p><%= friendship.email %></p>
+  <% end %>
+<% else %>
+  <p>No friends... (for now) :)</p>
 <% end %>

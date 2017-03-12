@@ -1,7 +1,7 @@
 class FriendshipsController < ApplicationController
   def index
   	@user = current_user
-  	#@friendships = current_user.all_friendships #create method later
+  	@all_friends = current_user.all_friends
   	@pending_friendships = current_user.pending_friends
   end
 
