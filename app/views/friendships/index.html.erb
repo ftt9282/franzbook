@@ -13,7 +13,7 @@
 <% end %>
 
 <h1>Current friends!</h1>
-<% if @all_friends %>
+<% unless @all_friends.empty? %>
   <% @all_friends.each do |friendship| %>
     <p><%= friendship.email %></p>
   <% end %>
