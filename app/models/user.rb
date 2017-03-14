@@ -11,6 +11,7 @@ class User < ApplicationRecord
                                   dependent:   :destroy
   has_many :friend_requests, through: :active_relationships, source: :passive_user
   has_many :pending_requests, through: :passive_relationships, source: :active_user
+  has_many :posts
   
   # Sends a friend request to another user
   def send_friend_request(other_user)
