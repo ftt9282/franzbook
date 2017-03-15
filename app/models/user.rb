@@ -12,6 +12,10 @@ class User < ApplicationRecord
   has_many :friend_requests, through: :active_relationships, source: :passive_user
   has_many :pending_requests, through: :passive_relationships, source: :active_user
   has_many :posts
+
+  def full_name
+    self.first_name + " " + self.last_name
+  end
   
   # Sends a friend request to another user
   def send_friend_request(other_user)
@@ -26,5 +30,16 @@ class User < ApplicationRecord
   def all_friends
     friendships = self.passive_relationships.where(status_flag: 1) || self.active_relationships.where(status_flag: 1)
     friendships.map { |f| f.active_user == self ? f.passive_user : f.active_user }
+  end
+
+  def franz_feed
+    active_user_ids =   "SELECT active_user_id FROM friendships
+                         WHERE passive_user_id = :user_id
+                         AND status_flag = 1"
+    passive_user_ids =  "SELECT active_user_id FROM friendships
+                         WHERE passive_user_id = :user_id
+                         AND status_flag = 1"
+    Post.where("user_id IN ((#{active_user_ids}), (#{passive_user_ids}))
+                OR user_id = :user_id", user_id: id)
   end
 end

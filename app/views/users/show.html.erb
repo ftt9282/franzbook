@@ -1,1 +1,15 @@
 <h1>This is the profile page for <%= @user.email %></h1>
+
+<%= form_for @post do |f| %>
+  <%= f.text_area :content, placeholder: "What's on your mind?" %>
+  <%= f.submit "Post" %>
+<% end %>
+
+<h2>Posts</h2>
+<% unless @franz_feed.empty? %>
+  <% @franz_feed.each do |post| %>
+    <p><%= post.user.full_name %></p>
+  	<p><%= post.content %></p>
+  	<p>________________________________</p>
+  <% end %>
+<% end %>

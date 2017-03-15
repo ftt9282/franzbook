@@ -6,5 +6,7 @@ class UsersController < ApplicationController
 
   def show
   	@user = current_user
+  	@post = Post.new
+  	@franz_feed = current_user.franz_feed
   end
 end

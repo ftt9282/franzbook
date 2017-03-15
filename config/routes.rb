@@ -5,4 +5,5 @@ Rails.application.routes.draw do
     resources :friendships, only: [:index, :create]
   end
   resources :friendships, only: [:update, :destroy]
+  resources :posts, only: [:create, :destroy]
 end
