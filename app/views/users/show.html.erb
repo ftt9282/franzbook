@@ -10,6 +10,19 @@
   <% @franz_feed.each do |post| %>
     <p><%= post.user.full_name %></p>
   	<p><%= post.content %></p>
+  	<% unless post.comments.empty? %>
+  	  <% post.comments.each do |comment| %>
+        <div style="padding-left: 1.8em; border-left: 1px solid">
+  	  	  <p><%= comment.user.full_name %></p>
+  	  	  <p><%= comment.content %></p>
+        </div>
+  	  <% end %>
+  	<% end %>
   	<p>________________________________</p>
+  	<%= form_for @comment do |f| %>
+  	  <%= f.hidden_field :post_id, :value => post.id %>
+  	  <%= f.text_area :content, placeholder: "Make a comment..." %>
+  	  <%= f.submit "Post" %>
+  	<% end %>
   <% end %>
 <% end %>
