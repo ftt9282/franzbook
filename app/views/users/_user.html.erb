@@ -1,7 +1,11 @@
 <li>
-  <%= link_to user.email, user %>
-  <% if current_user.friend_requests.include?(user) %>
-    <span>Might be friends</span>
+  <%= link_to user.full_name, user %>
+  <% if current_user.all_friends.include?(user) %>
+    <span>✓ Friends</span>
+  <% elsif current_user.friend_requests.include?(user) %>
+    <span>Friend Request Sent...</span>
+  <% elsif current_user.pending_requests.include?(user) %>
+    <%= link_to "Friend Request Pending", user_friendships_path(current_user) %>
   <% elsif user != current_user %>
     <%= form_for([current_user, current_user.active_relationships.build]) do |f| %>
       <%= hidden_field_tag :friend_id, user.id %>
