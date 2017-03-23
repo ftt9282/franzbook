@@ -2,13 +2,14 @@
   <nav class="navbar">
     <ul>
       <li style="float:left"><%= link_to "Fb", current_user, id: "logo" %></li>
-      <li><%= link_to "Profile", current_user %></li>
-      <li><%= link_to "Settings", edit_user_registration_path %></li>
       <% if user_signed_in? %>
         <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
       <% else %>
         <li><%= link_to "Sign in", new_user_session_path %></li>
       <% end %>
+      <li><%= link_to "Profile", current_user %></li>
+      <li><%= link_to "Settings", edit_user_registration_path %></li>
+      <li><%= link_to "Friends", user_friendships_path(current_user) %></li>
     </ul>
   </nav>
 </header>
