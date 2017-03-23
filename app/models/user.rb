@@ -34,14 +34,16 @@ class User < ApplicationRecord
   end
 
   def franz_feed
-    byebug
-    active_user_ids =   "SELECT active_user_id FROM friendships
-                         WHERE passive_user_id = :user_id
-                         AND status_flag = 1"
-    passive_user_ids =  "SELECT passive_user_id FROM friendships
-                         WHERE active_user_id = :user_id
-                         AND status_flag = 1"
-    thing = Post.where("user_id ANY ((#{active_user_ids}), (#{passive_user_ids}))
+    active_friend_ids =  "SELECT active_user_id FROM friendships
+                          WHERE status_flag = 1
+                          AND (passive_user_id = :user_id OR active_user_id = :user_id)"
+
+    passive_friend_ids =  "SELECT passive_user_id FROM friendships
+                          WHERE status_flag = 1
+                          AND (passive_user_id = :user_id OR active_user_id = :user_id)"
+                          
+    Post.where("user_id IN (#{active_friend_ids})
+                OR user_id IN (#{passive_friend_ids})
                 OR user_id = :user_id", user_id: id)
   end
 end
